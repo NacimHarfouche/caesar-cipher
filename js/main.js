@@ -8,12 +8,20 @@ let reverseArray = [" ", "z", "y", "x", "w", "v", "u", "t", "s", "r", "q", "p", 
 // store the message
 let message = "";
 
-// get the buttons 
+// get encrypt & decrypt buttons 
 let encryptButton = document.getElementById("encryptButton");
 let decryptButton = document.getElementById("decryptButton");
 
 // store the arrayLength
 arrayLettersLength = arrayLetters.length - 1;
+
+// get the input result encrypt & decrypt
+let inputEncryptResult = document.getElementById("resultEncryptText");
+let inputDecryptResult = document.getElementById("resultDecryptText");
+
+// get copy button
+let copyEncryptButton = document.getElementById("copyResultEncryptText");
+let copyDecryptButton = document.getElementById("copyResultDecryptText");
 
 /************
  * Functions 
@@ -91,6 +99,8 @@ function getDecipherMessage(arrayIndex, key) {
  ***********/
 // on click encrypt button
 encryptButton.addEventListener("click", () => {
+    // empty the input 
+    inputEncryptResult.value = "";
     // get the input text 
     let inputEncryptText = document.getElementById("encryptText").value;
     // get the encrypt key + parse the value
@@ -102,11 +112,15 @@ encryptButton.addEventListener("click", () => {
     let indexOfMessageToEncrypt = getIndexOfLetters(inputEncryptText);
     // store the encrypted message => get encrypted message
     let messageEncryptedEnd = getEncryptedMessage(indexOfMessageToEncrypt, keyEncryption);
-    console.log("encrypted message 1 : ", messageEncryptedEnd);
+    // store the result into the input
+    inputEncryptResult.value = messageEncryptedEnd;
+    console.log("encrypted message : ", messageEncryptedEnd);
 });
 
 // on click decrypt button
 decryptButton.addEventListener("click", () => {
+    // empty the input
+    inputDecryptResult.value = ""
     // get the input text
     let inputDecryptText = document.getElementById("decryptText").value;
     // get the decrypt key
@@ -117,7 +131,9 @@ decryptButton.addEventListener("click", () => {
     let indexOfMessageToDecipher = getIndexOfLetters(inputDecryptText);
     // store the decipher message => get the decipher message
     let messageDecipherEnd = getDecipherMessage(indexOfMessageToDecipher, keyEncryption);
-    console.log(messageDecipherEnd)
+    // store the result into the input
+    inputDecryptResult.value = messageDecipherEnd;
+    console.log("decrypted message : ", messageDecipherEnd)
     // test is it equal ?
     if (document.getElementById("encryptText").value === messageDecipherEnd) {
         console.log("ok")
@@ -127,6 +143,17 @@ decryptButton.addEventListener("click", () => {
     
 });
 
+// when click on the copy buttons
+copyEncryptButton.addEventListener("click", () => {
+    inputEncryptResult.select();
+    document.execCommand("copy");
+});
+
+copyDecryptButton.addEventListener("click", () => {
+    inputDecryptResult.select();
+    document.execCommand("copy");
+});
+
 // reload the page every 3sec
 var count = 0;
 // setInterval(() => {
@@ -134,28 +161,3 @@ var count = 0;
 //     console.log(count);
 //     if (count > 3) window.location.reload();
 // }, 1000);
-
-/***********
- * execution
- ***********/
-// // lightens the key 
-// keyEncryption = getLightensEncryptionKey(keyEncryption);
-
-
-// // get the index 
-// indexOfMessageToEncrypt = getIndexOfLetters(message);
-
-// // get encrypted message
-// messageEncryptedEnd = getEncryptedMessage(indexOfMessageToEncrypt, keyEncryption);
-// //console.log("encrypted message 1 : ", messageEncryptedEnd);
-
-// // get the index of the encrypted message
-// indexOfMessageToDecipher = getIndexOfLetters(messageEncryptedEnd);
-// // console.log(indexOfMessageToDecipher)
-
-// // get the decipher message
-// messageDecipherEnd = getDecipherMessage(indexOfMessageToDecipher, keyEncryption);
-// //console.log("decipher message 1 : ", messageDecipherEnd)
-
-// console.log("message : ", message)
-

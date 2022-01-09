@@ -22,7 +22,7 @@ section {
 h1, h3 {
     text-align: center;
 }
-input[type=text] {
+#encryptText, #decryptText {
     height: 5rem;
 }
 input[type=number] {
@@ -34,6 +34,7 @@ button[type=button] {
 hr {
     width: 80%;
     height: 0.4rem;
+    color: black;
 }
 
 /* footer */
